@@ -1,4 +1,4 @@
-package com.example.examplemod;
+package com.d1bg.waylandfix;
 
 import java.util.List;
 import java.util.Set;
