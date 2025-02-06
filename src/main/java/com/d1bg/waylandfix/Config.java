@@ -16,7 +16,8 @@ import net.neoforged.neoforge.common.ModConfigSpec;
 // Demonstrates how to use Neo's config APIs
 @EventBusSubscriber(modid = WaylandFix.MODID, bus = EventBusSubscriber.Bus.MOD)
 public class Config
-{
+  {
+
     private static final ModConfigSpec.Builder BUILDER = new ModConfigSpec.Builder();
 
     private static final ModConfigSpec.BooleanValue LOG_DIRT_BLOCK = BUILDER
@@ -61,3 +62,4 @@ public class Config
                 .collect(Collectors.toSet());
     }
 }
+
