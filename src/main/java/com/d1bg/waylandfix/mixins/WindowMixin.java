@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public class WindowMixin {
     @Inject(at = @At("HEAD"), method = "setIcon", cancellable = true)
     private void init(CallbackInfo info) {
-        if (GLFW.glfwGetVersionString().contains("Wayland")) {
+        if (GLFW.glfwGetPlatform() == GLFW.GLFW_PLATFORM_WAYLAND) {
             info.cancel();
         }
     }
