@@ -1,0 +1,28 @@
+package com.d1bg.waylandfix.mixins;
+
+
+import net.minecraft.client.gui.components.EditBox;
+import net.minecraft.client.gui.screens.Screen;
+import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Unique;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
+
+@Mixin(EditBox.class)
+public class TextFieldWidgetMixin {
+    @Inject(at = @At("HEAD"),method = "charTyped", cancellable = true)
+    private void charTyped(char chr, int modifiers, CallbackInfoReturnable<Boolean> cir) {
+        if (isSpecialChar(chr) && Screen.hasControlDown()) {
+            cir.setReturnValue(false);
+        }
+    }
+
+    @Unique
+    private boolean isSpecialChar(char chr) {
+        return chr == 'a' // CTRL + A (select all)
+            || chr == 'v' // CTRL + V (paste)
+            || chr == 'c' // CTRL + C (copy)
+            || chr == 'x'; // CTRL + X (cut)
+    }
+}
