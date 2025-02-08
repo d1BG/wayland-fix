@@ -20,9 +20,13 @@ public class TextFieldWidgetMixin {
 
     @Unique
     private boolean isSpecialChar(char chr) {
-        return chr == 'a' // CTRL + A (select all)
-            || chr == 'v' // CTRL + V (paste)
-            || chr == 'c' // CTRL + C (copy)
-            || chr == 'x'; // CTRL + X (cut)
+        return chr == 'a' // CTRL + a (select all)
+            || chr == 'v' // CTRL + v (paste)
+            || chr == 'c' // CTRL + c (copy)
+            || chr == 'x' // CTRL + x (cut);
+            || chr == 'A' // CTRL + A (select all)
+            || chr == 'V' // CTRL + V (paste)
+            || chr == 'C' // CTRL + C (copy)
+            || chr == 'X';// CTRL + X (cut)
     }
 }
