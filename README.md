@@ -1,27 +1,24 @@
+# Wayland Fix for NeoForge
 
-Installation information
-=======
+Minecraft running under Xwayland has always had its problems and there are multiple mods that aim to fix them, but all of them are for Fabric.
 
-This template repository can be directly cloned to get you started with a new
-mod. Simply create a new repository cloned from this one, by following the
-instructions at [github](https://docs.github.com/en/repositories/creating-and-managing-repositories/creating-a-repository-from-a-template).
+For this mod to work add `-Dorg.lwjgl.glfw.libname=/usr/lib/libglfw.so` in JVM arguments or the equivelent option in launchers like Prism - "Use System installation of GLFW" under the Workarounds section. 
 
-Once you have your clone, simply open the repository in the IDE of your choice. The usual recommendation for an IDE is either IntelliJ IDEA or Eclipse.
+Sometimes (mostly happening on Nvidia GPUs) the game still wont launch, you will need to set this env var: `__GL_THREADED_OPTIMIZATIONS = 0`
 
-> **Note**: For Eclipse, use tasks in `Launch Group` instead of ones founds in `Java Application`. A preparation task must run before launching the game. NeoGradle uses launch groups to do these subsequently.
+# What this mod fixes:
+- Adds a minecraft icon instead of the normal wayland icon.
+- Fixes key combinations: 'Ctrl+A', 'Ctrl+C', 'Ctrl+V' and 'Ctrl+X'
 
-If at any point you are missing libraries in your IDE, or you've run into problems you can
-run `gradlew --refresh-dependencies` to refresh the local cache. `gradlew clean` to reset everything 
-{this does not affect your code} and then start the process again.
+# Requirements:
+- glfw>=3.4
 
-Mapping Names:
-============
-By default, the MDK is configured to use the official mapping names from Mojang for methods and fields 
-in the Minecraft codebase. These names are covered by a specific license. All modders should be aware of this
-license. For the latest license text, refer to the mapping file itself, or the reference copy here:
-https://github.com/NeoForged/NeoForm/blob/main/Mojang.md
+## How to build?
+- `git clone https://github.com/d1BG/wayland-fix`
+- `cd wayland-fix`
+- `./gradlew build`
+- After building, the mod will be in `build/libs/waylandfix-version.jar`
 
-Additional Resources: 
-==========
-Community Documentation: https://docs.neoforged.net/  
-NeoForged Discord: https://discord.neoforged.net/
+## Special Thanks to:
+- [WaylandFix](https://github.com/StackDoubleFlow/MCWaylandFix)
+- [WayFix](https://github.com/not-coded/WayFix) - amazing mod, works on NeoForge, but not natively
