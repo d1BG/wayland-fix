@@ -9,11 +9,13 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
+import static java.lang.Character.toLowerCase;
+
 @Mixin(EditBox.class)
 public class TextFieldWidgetMixin {
     @Inject(at = @At("HEAD"),method = "charTyped", cancellable = true)
     private void charTyped(char chr, int modifiers, CallbackInfoReturnable<Boolean> cir) {
-        if (isSpecialChar(chr) && Screen.hasControlDown()) {
+        if (isSpecialChar(toLowerCase(chr)) && Screen.hasControlDown()) {
             cir.setReturnValue(false);
         }
     }
@@ -23,10 +25,6 @@ public class TextFieldWidgetMixin {
         return chr == 'a' // CTRL + a (select all)
             || chr == 'v' // CTRL + v (paste)
             || chr == 'c' // CTRL + c (copy)
-            || chr == 'x' // CTRL + x (cut);
-            || chr == 'A' // CTRL + A (select all)
-            || chr == 'V' // CTRL + V (paste)
-            || chr == 'C' // CTRL + C (copy)
-            || chr == 'X';// CTRL + X (cut)
+            || chr == 'x'; // CTRL + x (cut);
     }
 }
